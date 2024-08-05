@@ -18,7 +18,17 @@ export default function Home() {
             src={heroImg}
             priority={true}
           />
-          <h1 className={styles.title}>Sistema feiro para você se organizar <br></br>seus estudos e tarefas</h1>
+          <h1 className={styles.title}>
+            Sistema feiro para você se organizar <br></br>seus estudos e tarefas
+          </h1>
+          <div className={styles.infoContent}>
+            <section className={styles.box}>
+              <span>+ 90 comentários</span>
+            </section>
+            <section className={styles.box}>
+              <span>+ 12 posts</span>
+            </section>
+          </div>
         </div>
       </main>
     </div>
