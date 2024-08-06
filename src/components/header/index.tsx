@@ -1,8 +1,6 @@
-import { stat } from "fs";
 import styles from "./styles.module.css";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-import { setEngine } from "crypto";
 export default function Header() {
   const { data: session, status } = useSession();
   return (
@@ -14,18 +12,23 @@ export default function Header() {
               Tarefas <span>+</span>
             </h1>
           </Link>
-          <Link href="/dashboard" className={styles.link}>
-            Meu Painel
-          </Link>
+          {session?.user && (
+            <Link href="/dashboard" className={styles.link}>
+              Meu Painel
+            </Link>
+          )}
         </nav>
         {status === "loading" ? (
           <></>
-        ) : status ? (
+        ) : session ? (
           <button className={styles.loginButton} onClick={() => signOut()}>
-            Olá{session?.user?.name}
+            Olá {session?.user?.name}
           </button>
         ) : (
-          <button className={styles.loginButton} onClick={() => signIn()}>
+          <button
+            className={styles.loginButton}
+            onClick={() => signIn("google")}
+          >
             Entrar
           </button>
         )}
