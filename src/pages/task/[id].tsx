@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import styles from "./styles.module.css";
 import { GetServerSideProps } from "next";
 import { db } from "../../services/firebaseConnections";
+import { FaTrash } from "react-icons/fa";
 
 import {
   doc,
@@ -52,6 +53,15 @@ export default function Task({ item, allComments }: TaskProps) {
         name: session?.user?.name,
         taskId: item?.taskId,
       });
+      const data = {
+        id: docRef.id,
+        comment: input,
+        user: session?.user?.email,
+        name: session?.user?.name,
+        taskId: item?.taskId,
+      };
+
+      setComments((oldItem) => [...oldItem, data]);
 
       setInput("");
     } catch (err) {
@@ -93,8 +103,15 @@ export default function Task({ item, allComments }: TaskProps) {
         {comments.length === 0 && <p>Nenhum comentário encontrado</p>}
         {comments.map((item) => (
           <article key={item.id} className={styles.comment}>
+            <div className={styles.headComment}>
+              <label className={styles.commentsLabel}>{item.name}</label>
+              {item.user === session?.user?.email && (
+                <button className={styles.buttonTrash}>
+                  <FaTrash size={20} color="#ea3140" />
+                </button>
+              )}
+            </div>
             <p>{item.comment}</p>
-            <p>{item.name}</p>
           </article>
         ))}
       </section>
