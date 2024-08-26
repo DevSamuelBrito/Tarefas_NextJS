@@ -11,6 +11,7 @@ import {
   where,
   query,
   getDoc,
+  getDocs,
   addDoc,
 } from "firebase/firestore";
 import { Textarea } from "@/components/textarea";
@@ -23,11 +24,19 @@ interface TaskProps {
     user: string;
     taskId: string;
   };
+  allComments: CommentsProps[];
 }
-
-export default function Task({ item }: TaskProps) {
+interface CommentsProps {
+  id: string;
+  comment: string;
+  user: string;
+  name: string;
+  taskId: string;
+}
+export default function Task({ item, allComments }: TaskProps) {
   const { data: session } = useSession();
   const [input, setInput] = useState("");
+  const [comments, setComments] = useState<CommentsProps[]>(allComments || []);
 
   async function handleComment(event: FormEvent) {
     event.preventDefault();
@@ -78,6 +87,17 @@ export default function Task({ item }: TaskProps) {
           </button>
         </form>
       </section>
+
+      <section className={styles.commentsContainer}>
+        <h2> Todos os comentários</h2>
+        {comments.length === 0 && <p>Nenhum comentário encontrado</p>}
+        {comments.map((item) => (
+          <article key={item.id} className={styles.comment}>
+            <p>{item.comment}</p>
+            <p>{item.name}</p>
+          </article>
+        ))}
+      </section>
     </div>
   );
 }
@@ -86,7 +106,18 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.id as string;
 
   const docRef = doc(db, "tarefas", id);
-
+  const q = query(collection(db, "comments"), where("taskId", "==", id));
+  const snapshotComments = await getDocs(q);
+  let allComments: CommentsProps[] = [];
+  snapshotComments.forEach((doc) => {
+    allComments.push({
+      id: doc.id,
+      comment: doc.data().comment,
+      user: doc.data().user,
+      name: doc.data().name,
+      taskId: doc.data().taskId,
+    });
+  });
   const snapshot = await getDoc(docRef);
 
   if (snapshot.data() === undefined) {
@@ -119,6 +150,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return {
     props: {
       item: task,
+      allComments: allComments,
     },
   };
 };
