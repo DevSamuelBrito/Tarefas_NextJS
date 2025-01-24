@@ -1,40 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tarefas Next.js
 
-## Getting Started
+Este projeto é uma aplicação de lista de tarefas construída com Next.js. Ele permite que os usuários criem, compartilhem e comentem em tarefas.
 
-First, run the development server:
+## Funcionalidades
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Página Inicial**: Exibe uma visão geral das tarefas e comentários.
+- **Painel de Controle**: Usuários autenticados podem gerenciar suas tarefas, tornando-as públicas ou privadas.
+- **Detalhes da Tarefa**: Exibe detalhes de uma tarefa específica e permite que os usuários comentem nela.
+- **Autenticação**: Usuários podem se registrar e fazer login para acessar funcionalidades adicionais.
+- **API**: Endpoints para gerenciar tarefas e comentários.
+- **Tarefas Privadas**: Usuários podem criar tarefas privadas que são visíveis apenas para eles ou para um grupo específico de usuários.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **Next.js**: Framework React para renderização do lado do servidor e geração de sites estáticos.
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Node.js**: Ambiente de execução JavaScript no servidor.
+- **Firebase**: Banco de dados NoSQL para armazenamento de dados.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Como Executar o Projeto
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/tarefas-nextjs.git
+    ```
+2. Instale as dependências:
+    ```bash
+    cd tarefas-nextjs
+    npm install
+    ```
+3. Configure as variáveis de ambiente no arquivo `.env`.
+4. Inicie o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
+5. Acesse a aplicação em `http://localhost:3000`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Estrutura do Projeto
 
-## Learn More
+- **pages/**: Contém as páginas da aplicação.
+- **components/**: Contém os componentes reutilizáveis.
+- **api/**: Contém as rotas de API para gerenciar tarefas e comentários.
+- **styles/**: Contém os arquivos de estilo.
 
-To learn more about Next.js, take a look at the following resources:
+## Licença
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Imagens do Projeto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Tela Inicial**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Alt text](/public/assets/home.jpg)
+
+
+2. **Tela Após Login**
+
+![Alt text](/public/assets/start.jpg)
+
+
+3. **Tela de Tarefas** 
+
+![Alt text](/public/assets/task.jpg)
+
+
+4. **Tela de Tarefas Privadas**
+
+![Alt text](/public/assets/taskPriv.jpg)
